@@ -1,3 +1,4 @@
+Function Get-WhoIsActiveLock {
 
     [CmdletBinding()]
     Param
@@ -27,3 +28,4 @@
         
     }
 
+}

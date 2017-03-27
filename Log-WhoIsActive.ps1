@@ -1,3 +1,4 @@
+Function Log-WhoIsActive {
 
     [CmdletBinding()]
     Param
@@ -54,3 +55,4 @@
         
     }
 
+}

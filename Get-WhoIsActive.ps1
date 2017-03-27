@@ -1,3 +1,4 @@
+Function Get-WhoIsActive {
 
     [CmdletBinding()]
     Param
@@ -25,3 +26,4 @@
         
     }
 
+}

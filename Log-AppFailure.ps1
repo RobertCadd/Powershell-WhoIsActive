@@ -1,3 +1,4 @@
+Function Log-AppFailure {
 
     [CmdletBinding()]
     Param
@@ -30,3 +31,4 @@
              
     }
 
+}

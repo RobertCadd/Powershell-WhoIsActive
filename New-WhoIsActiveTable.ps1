@@ -1,3 +1,4 @@
+Function New-WhoIsActiveTable {
 
     [CmdletBinding()]
     Param
@@ -55,3 +56,4 @@
     } 
     #} 
 
+}

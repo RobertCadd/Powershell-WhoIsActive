@@ -1,3 +1,4 @@
+Function New-AppFailureTable {
 
     [CmdletBinding()]
     Param
@@ -32,3 +33,4 @@
     } 
     #} 
 
+}

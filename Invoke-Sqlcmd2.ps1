@@ -1,3 +1,4 @@
+Function Invoke-Sqlcmd2 {
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <# 
     .SYNOPSIS 
@@ -482,3 +483,4 @@
         }
     }
             
+}

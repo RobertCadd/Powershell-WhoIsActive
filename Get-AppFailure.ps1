@@ -1,3 +1,4 @@
+Function Get-AppFailure {
 
     [CmdletBinding()]
     Param
@@ -28,3 +29,4 @@
          return  $Result  
     }
 
+}

@@ -1,3 +1,4 @@
+Function Run-WhoIsActive {
 
     [CmdletBinding()]
     Param
@@ -58,3 +59,4 @@
         
     }
 
+}

@@ -1,3 +1,4 @@
+Function Invoke-Parallel {
 
     <#
     .SYNOPSIS
@@ -608,3 +609,4 @@
         }       
     }
 
+}

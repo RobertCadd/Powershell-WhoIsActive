@@ -1,3 +1,4 @@
+Function Create-WhoisActiveTables {
 
     [CmdletBinding()]
     Param
@@ -27,3 +28,4 @@
          
     }
 
+}

@@ -1,3 +1,4 @@
+Function Get-SqlCredHash {
 
     [cmdletbinding()]
 
@@ -74,3 +75,4 @@
     
     }
 
+}

@@ -1,3 +1,4 @@
+Function New-WhoIsActiveAppLockTable {
 
     [CmdletBinding()]
     Param
@@ -32,3 +33,4 @@
     } 
      
 
+}

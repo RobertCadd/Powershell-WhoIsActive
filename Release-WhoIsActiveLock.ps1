@@ -1,3 +1,4 @@
+Function Release-WhoIsActiveLock {
 
     [CmdletBinding()]
     Param
@@ -23,3 +24,4 @@
              
     }
 
+}
