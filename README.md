@@ -8,9 +8,9 @@ import-module WhoIsActive.psm1
                           
 \$Credential = New-Object System.Management.Automation.PSCredential ("FooUser", $secpasswd)
 
-\$SqlCredHash = @{"Credential" =\$Credential;"ServerInstance" = "MsSql";"Database" = "Foo"}
+\$SqlCredHash = @{"Credential" = \$Credential;"ServerInstance" = "MsSql";"Database" = "Foo"}
 
-Run-WhoIsActive -SqlCredobject $SqlCredHash 
+Run-WhoIsActive -SqlCredHash $SqlCredHash 
 
 To Create the tables needed for logging:
 
