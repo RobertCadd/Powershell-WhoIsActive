@@ -1,11 +1,10 @@
 # **Powershell**
-This  will run sp_whoisactive once every 5 seconds for a minute then log the results to a table:
+This  will run sp_whoisactive once every 5 seconds for a minute then log the results to a table
 # Instructions
 Create the tables:
 ```powershell 
-##Whoisactive##
 
-Import-Module "WhoIsActive.psm1"
+Import-Module "C:\Temp\WhoIsActive.psm1"
 
 $secpasswd = ConvertTo-SecureString "Foo" -AsPlainText -Force                        
 
@@ -15,9 +14,9 @@ $SqlCredHash = @{"Credential" = $Credential;"ServerInstance" = "MsSql";"Database
 
 Create-WhoisActiveTables -SqlCredHash $SqlCredHash 
 ```
-Run it 
+Run it:
 ```powershell 
-##Whoisactive##
+
 Run-WhoIsActive -SqlCredHash $SqlCredHash 
 
 ```
