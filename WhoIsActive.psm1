@@ -1458,7 +1458,7 @@ function Run-WhoIsActive
         }
         else{
         
-            Write-host "can not get lock for sp_whoisactive on $($SqlCredHash.SqlServer), SP_Whoisacitve is already running"
+            Write-host "can not get lock for sp_whoisactive on $($SqlCredHash.ServerInstance), SP_Whoisacitve is already running"
             
         }        
     }
