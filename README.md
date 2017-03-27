@@ -1,17 +1,23 @@
-# Powershell
+# **Powershell**
+This  will run sp_whoisactive once every 5 seconds for a minute then log the results to a table:
+# Instructions
+Create the tables:
+```powershell 
+##Whoisactive##
 
-This Module will run sp_whoisactive once every 5 seconds for a minute then log the results to a table:
+Import-Module "WhoIsActive.psm1"
 
-import-module WhoIsActive.psm1
+$secpasswd = ConvertTo-SecureString "Foo" -AsPlainText -Force                        
 
-\$secpasswd = ConvertTo-SecureString "Foo" -AsPlainText -Force
-                          
-\$Credential = New-Object System.Management.Automation.PSCredential ("FooUser", $secpasswd)
+$Credential = New-Object System.Management.Automation.PSCredential ("FooUser", $secpasswd)
 
-\$SqlCredHash = @{"Credential" = \$Credential;"ServerInstance" = "MsSql";"Database" = "Foo"}
-
-Run-WhoIsActive -SqlCredHash $SqlCredHash 
-
-To Create the tables needed for logging:
+$SqlCredHash = @{"Credential" = $Credential;"ServerInstance" = "MsSql";"Database" = "Foo"}
 
 Create-WhoisActiveTables -SqlCredHash $SqlCredHash 
+```
+Run it 
+```powershell 
+##Whoisactive##
+Run-WhoIsActive -SqlCredHash $SqlCredHash 
+
+```
