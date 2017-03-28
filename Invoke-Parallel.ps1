@@ -183,7 +183,7 @@ Function Invoke-Parallel {
 			[switch] $Quiet = $false
     )
     
-    Begin {
+    begin {
                 
         #No max queue specified?  Estimate one.
         #We use the script scope to resolve an odd PowerShell 2 issue where MaxQueue isn't seen later in the function
@@ -299,7 +299,7 @@ Function Invoke-Parallel {
                             }
 
                             #everything is logged, clean up the runspace
-                            $runspace.powershell.EndInvoke($runspace.Runspace)
+                            $runspace.powershell.endInvoke($runspace.Runspace)
                             $runspace.powershell.dispose()
                             $runspace.Runspace = $null
                             $runspace.powershell = $null
@@ -349,7 +349,7 @@ Function Invoke-Parallel {
                 #Loop again only if -wait parameter and there are more runspaces to process
                 } while ($more -and $PSBoundParameters['Wait'])
                 
-            #End of runspace function
+            #end of runspace function
             }
 
         #endregion functions
@@ -498,7 +498,7 @@ Function Invoke-Parallel {
         #endregion INIT
     }
 
-    Process {
+    process {
 
         #add piped objects to all objects or set all objects to bound input object parameter
         if($bound)
@@ -511,7 +511,7 @@ Function Invoke-Parallel {
         }
     }
 
-    End {
+    end {
         
         #Use Try/Finally to catch Ctrl+C and clean up.
         Try
@@ -558,8 +558,8 @@ Function Invoke-Parallel {
                     $temp.StartTime = Get-Date
                     $temp.object = $object
     
-                    #Save the handle output when calling BeginInvoke() that will be used later to end the runspace
-                    $temp.Runspace = $powershell.BeginInvoke()
+                    #Save the handle output when calling beginInvoke() that will be used later to end the runspace
+                    $temp.Runspace = $powershell.beginInvoke()
                     $startedCount++
 
                     #Add the temp tracking info to $runspaces collection

@@ -1095,7 +1095,6 @@ function Invoke-Sqlcmd2
         }
     }
             }
-
 Function Get-SqlCredHash 
 {
     [cmdletbinding()]
@@ -1241,10 +1240,19 @@ function Get-WhoIsActiveLock
 {
     [CmdletBinding()]
     Param
-    (       [Parameter(Mandatory=$true,
+    (   
+            [Parameter(Mandatory=$true,
                    ValueFromPipelineByPropertyName=$true,
                    Position=0)]
-        [hashtable] $SqlCredHash
+            [PSCredential] $Credential,
+              [Parameter(Mandatory=$true,
+                   ValueFromPipelineByPropertyName=$true,
+                   Position=0)]
+            [string] $ServerInstance,
+              [Parameter(Mandatory=$true,
+                   ValueFromPipelineByPropertyName=$true,
+                   Position=0)]
+            [string] $Database
 
     )
 
@@ -1257,7 +1265,7 @@ function Get-WhoIsActiveLock
     Process
     {
          
-        $Result = Invoke-Sqlcmd2 @SqlCredHash -Query $query
+        $Result = Invoke-Sqlcmd2 @PSBoundParameters -Query $query
       
     }
     End
@@ -1328,7 +1336,16 @@ function Get-WhoIsActive
     (       [Parameter(Mandatory=$true,
                    ValueFromPipelineByPropertyName=$true,
                    Position=0)]
-            [hashtable] $SqlCredHash
+            [PSCredential] $Credential,
+              [Parameter(Mandatory=$true,
+                   ValueFromPipelineByPropertyName=$true,
+                   Position=0)]
+            [string] $ServerInstance,
+              [Parameter(Mandatory=$true,
+                   ValueFromPipelineByPropertyName=$true,
+                   Position=0)]
+            [string] $Database
+
 
     )
 
@@ -1338,8 +1355,8 @@ function Get-WhoIsActive
     }
     Process
     {
-           
-        $Result = Invoke-Sqlcmd2 @SqlCredHash -Query $query -As PSObject
+        $Result = Invoke-Sqlcmd2 @PSBoundParameters -Query $query -As PSObject   
+        #$Result = Invoke-Sqlcmd2 @SqlCredHash -Query $query -As PSObject
                 
     }
     End

@@ -2,28 +2,19 @@ Function Lock-WhoIsActiveLock {
 
     [CmdletBinding()]
     Param
-    (       [Parameter(Mandatory=$true,
-                   ValueFromPipelineByPropertyName=$true,
-                   Position=0)]
-       [hashtable] $SqlCredHash
-
+    (       
+        [Parameter(Mandatory=$true)]
+        [hashtable] 
+        $SqlCredHash
     )
-
-    Begin
-    { 
+    
+    process {
+           
         $date = (Get-Date -Format "yyyy-MM-dd HH:mm:ss")
-        $query = "update [WHOISACTIVE_AppLock] set [WIA_Running] = '-1',Lock_Acquired = '$date'"
-          
-    }
-    Process
-    {
-          
-        Invoke-Sqlcmd2 @SqlCredHash -Query $query
-              
-    }
-    End
-    {   
-             
+        
+        $query = "update [WHOISACTIVE_AppLock] set [WIA_Running] = '-1',Lock_Acquired = '$date'"  
+        
+        Invoke-Sqlcmd2 @SqlCredHash -Query $query             
     }
 
 }

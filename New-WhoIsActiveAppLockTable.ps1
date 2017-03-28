@@ -3,34 +3,29 @@ Function New-WhoIsActiveAppLockTable {
     [CmdletBinding()]
     Param
     (       
-            [Parameter(Mandatory=$true,
-                ValueFromPipelineByPropertyName=$true,
-                Position=0)]
-             [hashtable] $SqlCredHash
+        [Parameter(Mandatory=$true)]
+        [hashtable] 
+        $SqlCredHash
   
     )
-    Begin
+    begin
     {
-                $Query = @"
+        $Query = @"              
+        CREATE TABLE [dbo].[WHOISACTIVE_AppLock](
+	        [WIA_Running] [int] NULL,
+	        [Lock_Acquired] [datetime] NULL
+        ) ON [PRIMARY]
 
-              
-                CREATE TABLE [dbo].[WHOISACTIVE_AppLock](
-	                [WIA_Running] [int] NULL,
-	                [Lock_Acquired] [datetime] NULL
-                ) ON [PRIMARY]
-
-                INSERT INTO [dbo].[WHOISACTIVE_AppLock] ([WIA_Running])  VALUES (0)
+        INSERT INTO [dbo].[WHOISACTIVE_AppLock] ([WIA_Running])  VALUES (0)
 
 "@
 
-
     }
-    Process
-    {
-      
+
+    process {
+       
         Invoke-Sqlcmd2 @SqlCredHash -Query $query
 
-    } 
-     
+    }     
 
 }

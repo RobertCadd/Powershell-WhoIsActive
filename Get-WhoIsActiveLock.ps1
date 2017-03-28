@@ -2,30 +2,19 @@ Function Get-WhoIsActiveLock {
 
     [CmdletBinding()]
     Param
-    (       [Parameter(Mandatory=$true,
-                   ValueFromPipelineByPropertyName=$true,
-                   Position=0)]
-        [hashtable] $SqlCredHash
-
+    (   
+        [Parameter(Mandatory=$true)]     
+        [hashtable] 
+        $SqlCredHash
     )
-
-    Begin
-    { 
+    
+    process {
+          
         $query = "SELECT [WIA_Running] FROM [WHOISACTIVE_AppLock]"
 
-          
-    }
-    Process
-    {
-         
-        $Result = Invoke-Sqlcmd2 @SqlCredHash -Query $query
-      
-    }
-    End
-    {
-    
-        return $Result
-        
+        $result = Invoke-Sqlcmd2 @SqlCredHash -Query $query
+
+        return $result      
     }
 
 }

@@ -2,26 +2,17 @@ Function Release-WhoIsActiveLock {
 
     [CmdletBinding()]
     Param
-    (       [Parameter(Mandatory=$true,
-                   ValueFromPipelineByPropertyName=$true,
-                   Position=0)]
-       [hashtable] $SqlCredHash
-
+    (       
+        [Parameter(Mandatory=$true)]
+        [hashtable] 
+        $SqlCredHash
     )
-
-    Begin
-    { 
+    
+    process {
+           
         $query = "update [WHOISACTIVE_AppLock] set [WIA_Running] = '0'"
-
-    }
-    Process
-    {
-          Invoke-Sqlcmd2 @SqlCredHash -Query $query
-              
-    }
-    End
-    {   
-             
+        
+        Invoke-Sqlcmd2 @SqlCredHash -Query $query             
     }
 
 }

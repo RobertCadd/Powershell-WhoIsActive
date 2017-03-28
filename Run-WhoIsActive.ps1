@@ -2,61 +2,51 @@ Function Run-WhoIsActive {
 
     [CmdletBinding()]
     Param
-    (       [Parameter(Mandatory=$true,
-                   ValueFromPipelineByPropertyName=$true,
-                   Position=0)]
-            [hashtable] $SqlCredHash
-
+    (       
+        [Parameter(Mandatory=$true)]     
+        [hashtable] 
+        $SqlCredHash
     )
 
-    Begin
-    { 
-        
-          
-    }
-    Process
-    {
+    process {
+   
         $date = (Get-Date -Format "yyyy-MM-dd HH:mm:ss")
 
-        Log-AppFailure -SqlCredHash $SqlCredHash -date $date 
+        Log-AppFailure -SqlCredHash $SqlCredHash -Date $date 
         
         $locked = Get-WhoIsActiveLock -SqlCredHash $SqlCredHash
         
-        if($locked.WIA_Running -eq 0){
+        if($locked.WIA_Running -eq 0) {
     
             Lock-WhoIsActiveLock -SqlCredHash $SqlCredHash 
     
-            $WIAData = @()
+            $whoIsActiveData = @()
     
-            $Count = 0 
+            $count = 0 
 
-            DO
+            Do
             {
-                $Data =  Get-WhoIsActive -SqlCredHash $SqlCredHash
+                $data =  Get-WhoIsActive -SqlCredHash $SqlCredHash
         
-                $WIAData += $Data
+                $whoIsActiveData += $Data
 
                 start-sleep -seconds 5
 
-                $Count++
+                $count++
 
             } While ($Count -le 10)
 
-            $recNum = (get-AppFailure -SqlCredHash $SqlCredHash -date $date).RECORD_NUMBER
+            $recordNumber = (get-AppFailure -SqlCredHash $SqlCredHash -date $date).RECORD_NUMBER
      
-            Log-WhoIsActive -SqlCredHash $SqlCredHash -dataObject $WIAData -date $date -recnum $recNum 
+            Log-WhoIsActive -SqlCredHash $SqlCredHash -dataObject $whoIsActiveData -date $date -recnum $recordNumber 
 
             Release-WhoIsActiveLock -SqlCredHash $SqlCredHash
         }
-        else{
+        else {
         
             Write-host "can not get lock for sp_whoisactive on $($SqlCredHash.ServerInstance), sp_whoisactive is already running"
             
         }        
-    }
-    End
-    {
-        
     }
 
 }

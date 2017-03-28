@@ -1,49 +1,42 @@
 Function Get-SqlCredHash {
 
     [cmdletbinding()]
+    Param 
+    (            
+        [Parameter()]
+        [string] 
+        $Connection,
+        
+        [Parameter()]
+        [string] 
+        $File 
+    )
 
-    param (            
-        [Parameter(
-        ValueFromPipelineByPropertyName=$true,
-        Position=0)]
-        [string] $Connection,
-        [Parameter(
-        ValueFromPipelineByPropertyName=$true,
-        Position=1)]
-        [string] $file
-  
-        )
-
-    Begin {  
-       
-         $CredObject = @{
+    begin {
+            
+        $credObject = @{
             Credential = ''
             ServerInstance = ''
             Database = ''
         }
-
-        $connStringElement =$null    
     }
 
     process {
-                       
+                          
         if($Connection) {
-           
-            $connStringElement  = $Connection
-                   
-            $builder = New-Object System.Data.SqlClient.SqlConnectionStringBuilder($connStringElement)
+                 
+            $builder = New-Object System.Data.SqlClient.SqlConnectionStringBuilder($Connection)
 
             $secpasswd = ConvertTo-SecureString $builder.Password -AsPlainText -Force
                           
-            $CredObject.Credential = New-Object System.Management.Automation.PSCredential ($builder.UserID, $secpasswd)
+            $credObject.Credential = New-Object System.Management.Automation.PSCredential ($builder.UserID, $secpasswd)
     
-            $CredObject.ServerInstance = $builder.DataSource
+            $credObject.ServerInstance = $builder.DataSource
 
-            $CredObject.Database =  $builder.InitialCatalog
-
+            $credObject.Database =  $builder.InitialCatalog
         }
-        elseif(test-path $file) {
-                           
+        elseif(test-path $file) { 
+                                  
             Write-Host "using $file"
                     
             $bootini  = Get-IniContent -FilePath $file
@@ -54,25 +47,21 @@ Function Get-SqlCredHash {
 
             $secpasswd = ConvertTo-SecureString $builder.Password -AsPlainText -Force
             
-            $CredObject.Credential = New-Object System.Management.Automation.PSCredential ($builder.UserID, $secpasswd)
+            $credObject.Credential = New-Object System.Management.Automation.PSCredential ($builder.UserID, $secpasswd)
     
-            $CredObject.ServerInstance = $builder.DataSource
+            $credObject.ServerInstance = $builder.DataSource
 
-            $CredObject.Database =  $builder.InitialCatalog
-       
+            $credObject.Database =  $builder.InitialCatalog      
         }                       
-        else {
-                
+        else { 
+                       
             write-host "Get-SqlCredHash did not build parameters"
-
-        }
-           
-    }           
-      
+        }          
+    }
+                       
     end {
-    
-        return $CredObject
-    
+        
+        return $CredObject   
     }
 
 }

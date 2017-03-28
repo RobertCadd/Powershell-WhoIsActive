@@ -2,28 +2,19 @@ Function Get-WhoIsActive {
 
     [CmdletBinding()]
     Param
-    (       [Parameter(Mandatory=$true,
-                   ValueFromPipelineByPropertyName=$true,
-                   Position=0)]
-            [hashtable] $SqlCredHash
-
+    (             
+        [Parameter(Mandatory=$true)]     
+        [hashtable] 
+        $SqlCredHash
     )
 
-    Begin
-    { 
-        $query = "exec sp_whoisactive"
-    }
-    Process
-    {
+    process {
            
-        $Result = Invoke-Sqlcmd2 @SqlCredHash -Query $query -As PSObject
-                
-    }
-    End
-    {
-    
-        return $Result
-        
+        $query = "exec sp_whoisactive"
+
+        $result = Invoke-Sqlcmd2 @SqlCredHash -Query $query -As PSObject
+
+        return $result                
     }
 
 }

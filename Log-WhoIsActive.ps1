@@ -2,36 +2,32 @@ Function Log-WhoIsActive {
 
     [CmdletBinding()]
     Param
-    (       [Parameter(Mandatory=$true,
-                   ValueFromPipelineByPropertyName=$true,
-                   Position=0)]
-            [hashtable] $SqlCredHash,
-            [Parameter(Mandatory=$true,
-                   ValueFromPipelineByPropertyName=$true,
-                   Position=1)]
-            [PSCustomObject] $dataObject,
-            [Parameter(Mandatory=$true,
-                   ValueFromPipelineByPropertyName=$true,
-                   Position=2)]
-            [Datetime] $date,
-            [Parameter(Mandatory=$true,
-                   ValueFromPipelineByPropertyName=$true,
-                   Position=3)]
-            [int] $recnum
+    (       
+        [Parameter(Mandatory=$true)]
+        [hashtable] 
+        $SqlCredHash,
+        [Parameter(Mandatory=$true)]
+        [PSCustomObject] 
+        $dataObject,
+        [Parameter(Mandatory=$true)]
+        [Datetime] 
+        $date,
+        [Parameter(Mandatory=$true)]
+        [int] 
+        $recnum
     )
 
-    Begin
-    {
+    begin {
+    
         if($dataObject.Count -eq 0){
 
             Return
 
-        }
-                      
+        }                      
     }
-    Process
-    {
-                    
+
+    process { 
+                       
         $queries = @() 
 
         foreach($datarow in $dataObject){
@@ -48,11 +44,8 @@ Function Log-WhoIsActive {
         foreach($query in  $queries) {
         
             Invoke-Sqlcmd2 @SqlCredHash -Query $query 
-        }
-    }
-    End
-    {
         
+        }
     }
 
 }

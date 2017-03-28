@@ -261,7 +261,7 @@ Function Invoke-Sqlcmd2 {
         $SQLConnection
     ) 
 
-                Begin
+                begin
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 {
         if ($InputFile) 
         { 
@@ -354,7 +354,7 @@ Function Invoke-Sqlcmd2 {
         }
 
     }
-                Process
+                process
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     {
         foreach($SQLInstance in $ServerInstance)
         {
