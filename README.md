@@ -4,7 +4,12 @@ This  will run sp_whoisactive once every 5 seconds for a minute then log the res
 Create the tables and sp_whoisactive:
 ```powershell 
 
-Import-Module "C:\Temp\WhoIsActive.psm1"
+# One time setup
+    # Download the repository
+    # Unblock the zip
+    # Extract the  WhoIsActive folder to a module path (e.g. $env:USERPROFILE\Documents\WindowsPowerShell\Modules\)
+
+	import-module WhoIsActive
 
 $secpasswd = ConvertTo-SecureString "FooPw" -AsPlainText -Force                        
 
