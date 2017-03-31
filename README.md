@@ -24,6 +24,6 @@ Invoke-WhoIsActive -SqlCredHash $SqlCredHash
 You can specify the number of minutes to run :
 ```powershell 
 
-Invoke-WhoIsActive -minutes 2 -SqlCredHash $SqlCredHash
+Invoke-WhoIsActive -Minutes 2 -SqlCredHash $SqlCredHash
 
 ```
