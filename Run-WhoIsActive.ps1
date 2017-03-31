@@ -1,6 +1,5 @@
 Function Run-WhoIsActive {
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]     
@@ -49,5 +48,4 @@ Function Run-WhoIsActive {
             
         }        
     }
-
 }

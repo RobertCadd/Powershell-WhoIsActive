@@ -1,6 +1,5 @@
 Function Invoke-Parallel {
-
-    <#
+<#
     .SYNOPSIS
         function to control parallel processing using runspaces
 
@@ -608,5 +607,4 @@ Function Invoke-Parallel {
             [gc]::Collect()
         }       
     }
-
 }

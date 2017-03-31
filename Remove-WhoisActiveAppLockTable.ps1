@@ -1,7 +1,5 @@
 Function Remove-WhoisActiveAppLockTable {
-
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]
@@ -16,6 +14,4 @@ Function Remove-WhoisActiveAppLockTable {
         Invoke-Sqlcmd2 @SqlCredHash -Query $query
 
     }
-    
-
 }

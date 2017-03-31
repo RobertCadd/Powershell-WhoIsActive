@@ -1,6 +1,5 @@
 Function Lock-WhoIsActiveLock {
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]
@@ -16,5 +15,4 @@ Function Lock-WhoIsActiveLock {
         
         Invoke-Sqlcmd2 @SqlCredHash -Query $query             
     }
-
 }

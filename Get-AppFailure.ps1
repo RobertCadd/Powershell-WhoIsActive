@@ -1,6 +1,5 @@
 Function Get-AppFailure {
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]
@@ -20,5 +19,4 @@ Function Get-AppFailure {
 
         return  $result             
     }
-
 }

@@ -1,6 +1,5 @@
 Function New-AppFailureTable {
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]
@@ -27,6 +26,5 @@ Function New-AppFailureTable {
       
          Invoke-Sqlcmd2 @SqlCredHash -Query $query
 
-    } 
-
+    }
 }

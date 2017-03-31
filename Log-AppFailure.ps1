@@ -1,6 +1,5 @@
 Function Log-AppFailure {
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (              
         [Parameter(Mandatory=$true)]
@@ -18,5 +17,4 @@ Function Log-AppFailure {
         
         Invoke-Sqlcmd2 @SqlCredHash -Query $query             
     }
-
 }

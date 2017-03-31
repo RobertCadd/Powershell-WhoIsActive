@@ -1,6 +1,5 @@
 Function New-WhoIsActiveAppLockTable {
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]
@@ -26,6 +25,5 @@ Function New-WhoIsActiveAppLockTable {
        
         Invoke-Sqlcmd2 @SqlCredHash -Query $query
 
-    }     
-
+    }
 }

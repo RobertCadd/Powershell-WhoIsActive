@@ -1,6 +1,5 @@
 Function Setup-WhoisActive {
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]
@@ -19,5 +18,4 @@ Function Setup-WhoisActive {
         New-WhoIsActiveAppLockTable -SqlCredHash $SqlCredHash
               
     }
-
 }

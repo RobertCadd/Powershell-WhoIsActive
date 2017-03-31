@@ -1,7 +1,5 @@
 Function Remove-WhoisActiveTable {
-
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]
@@ -16,6 +14,4 @@ Function Remove-WhoisActiveTable {
         Invoke-Sqlcmd2 @SqlCredHash -Query $query
 
     }
-    
-
 }

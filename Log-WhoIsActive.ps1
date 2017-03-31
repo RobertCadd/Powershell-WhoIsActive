@@ -1,6 +1,5 @@
 Function Log-WhoIsActive {
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]
@@ -50,5 +49,4 @@ Function Log-WhoIsActive {
         
         }
     }
-
 }

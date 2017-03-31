@@ -1,6 +1,5 @@
 Function Test-WhoIsActivePresent {
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]
@@ -18,6 +17,4 @@ Function Test-WhoIsActivePresent {
         return $result
 
     }
-      
-
 }

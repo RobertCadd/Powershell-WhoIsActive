@@ -1,6 +1,5 @@
 Function Invoke-Sqlcmd2 {
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <# 
+<# 
     .SYNOPSIS 
         Runs a T-SQL script. 
     .DESCRIPTION 
@@ -482,5 +481,4 @@ Function Invoke-Sqlcmd2 {
             }
         }
     }
-            
 }

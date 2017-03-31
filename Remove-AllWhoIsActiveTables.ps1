@@ -1,7 +1,5 @@
 Function Remove-AllWhoIsActiveTables {
-
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]
@@ -18,6 +16,4 @@ Function Remove-AllWhoIsActiveTables {
         Remove-WhoisActiveAppLockTable -SqlCredHash $SqlCredHash
 
     }
-    
-
 }

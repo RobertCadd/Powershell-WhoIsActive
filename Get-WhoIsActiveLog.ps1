@@ -1,7 +1,5 @@
 Function Get-WhoIsActiveLog {
-
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (             
         [Parameter(Mandatory=$true)]     
@@ -23,6 +21,4 @@ Function Get-WhoIsActiveLog {
 
         return $result                
     }
-
-
 }

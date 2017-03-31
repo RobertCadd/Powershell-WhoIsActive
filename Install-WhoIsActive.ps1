@@ -1,6 +1,5 @@
 Function Install-WhoIsActive {
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]
@@ -4686,6 +4685,4 @@ Function Install-WhoIsActive {
         Invoke-Sqlcmd2 -ServerInstance $SqlCredHash.ServerInstance -Database Master -Credential $SqlCredHash.Credential  -Query $query
 
     }
-      
-
 }

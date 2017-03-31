@@ -1,6 +1,5 @@
 Function Invoke-WhoIsActive {
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]     
@@ -27,6 +26,4 @@ Function Invoke-WhoIsActive {
         }
 
     }
-
-
 }

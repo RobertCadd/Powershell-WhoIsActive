@@ -1,6 +1,5 @@
 Function Get-WhoIsActiveLock {
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (   
         [Parameter(Mandatory=$true)]     
@@ -16,5 +15,4 @@ Function Get-WhoIsActiveLock {
 
         return $result      
     }
-
 }

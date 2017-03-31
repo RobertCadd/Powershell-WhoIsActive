@@ -1,7 +1,5 @@
 Function Remove-AppFailureTable {
-
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]
@@ -16,6 +14,4 @@ Function Remove-AppFailureTable {
         Invoke-Sqlcmd2 @SqlCredHash -Query $query
 
     }
-    
-
 }

@@ -1,6 +1,5 @@
 Function New-WhoIsActiveTable {
-
-    [CmdletBinding()]
+[CmdletBinding()]
     Param
     (       
         [Parameter(Mandatory=$true)]
@@ -52,6 +51,5 @@ Function New-WhoIsActiveTable {
        
         Invoke-Sqlcmd2 @SqlCredHash -Query $query
 
-    }    
-
+    }
 }

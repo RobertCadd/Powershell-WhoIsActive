@@ -1,6 +1,5 @@
 Function Get-SqlCredHash {
-
-    [cmdletbinding()]
+[cmdletbinding()]
     Param 
     (            
         [Parameter()]
@@ -63,5 +62,4 @@ Function Get-SqlCredHash {
         
         return $CredObject   
     }
-
 }
