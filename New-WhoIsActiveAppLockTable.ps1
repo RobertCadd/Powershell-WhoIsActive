@@ -27,5 +27,4 @@ Function New-WhoIsActiveAppLockTable {
         Invoke-Sqlcmd2 @SqlCredHash -Query $query
 
     }     
-
 }

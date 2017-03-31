@@ -50,5 +50,4 @@ Function Log-WhoIsActive {
         
         }
     }
-
 }

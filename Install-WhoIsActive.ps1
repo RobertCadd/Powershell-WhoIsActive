@@ -4685,7 +4685,5 @@ Function Install-WhoIsActive {
        
         Invoke-Sqlcmd2 -ServerInstance $SqlCredHash.ServerInstance -Database Master -Credential $SqlCredHash.Credential  -Query $query
 
-    }
-      
-
+    }     
 }

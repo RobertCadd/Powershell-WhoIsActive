@@ -23,7 +23,5 @@ Function Invoke-WhoIsActive {
             Run-WhoIsActive -SqlCredHash $SqlCredHash
 
         }
-
     }
-
 }

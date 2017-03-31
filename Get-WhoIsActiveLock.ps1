@@ -16,5 +16,4 @@ Function Get-WhoIsActiveLock {
 
         return $result      
     }
-
 }

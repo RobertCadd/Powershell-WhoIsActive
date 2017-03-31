@@ -63,5 +63,4 @@ Function Get-SqlCredHash {
         
         return $CredObject   
     }
-
 }

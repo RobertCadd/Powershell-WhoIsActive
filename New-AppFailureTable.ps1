@@ -28,5 +28,4 @@ Function New-AppFailureTable {
          Invoke-Sqlcmd2 @SqlCredHash -Query $query
 
     } 
-
 }

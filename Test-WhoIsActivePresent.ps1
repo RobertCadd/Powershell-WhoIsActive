@@ -17,7 +17,5 @@ Function Test-WhoIsActivePresent {
 
         return $result
 
-    }
-      
-
+    }     
 }

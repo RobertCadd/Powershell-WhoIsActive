@@ -23,6 +23,4 @@ Function Get-WhoIsActiveLog {
 
         return $result                
     }
-
-
 }

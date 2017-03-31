@@ -53,5 +53,4 @@ Function New-WhoIsActiveTable {
         Invoke-Sqlcmd2 @SqlCredHash -Query $query
 
     }    
-
 }

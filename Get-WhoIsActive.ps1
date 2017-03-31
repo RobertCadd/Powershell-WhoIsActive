@@ -16,5 +16,4 @@ Function Get-WhoIsActive {
 
         return $result                
     }
-
 }

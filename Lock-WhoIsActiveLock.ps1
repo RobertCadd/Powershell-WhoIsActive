@@ -16,5 +16,4 @@ Function Lock-WhoIsActiveLock {
         
         Invoke-Sqlcmd2 @SqlCredHash -Query $query             
     }
-
 }

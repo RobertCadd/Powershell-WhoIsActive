@@ -49,5 +49,4 @@ Function Run-WhoIsActive {
             
         }        
     }
-
 }
