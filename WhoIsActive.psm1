@@ -1376,6 +1376,8 @@ function Invoke-WhoIsActive
 
             Run-WhoIsActive -SqlCredHash $SqlCredHash
 
+            Write-Verbose "$minute complete" 
+
         }
 
     }
@@ -6319,7 +6321,7 @@ function Get-WhoIsActiveLog
                 
         $query = "select * from WHOISACTIVE order by record_number,collection_time"
 
-        if($desc){ $query = "select * from WHOISACTIVE order by record_number,collection_time desc" }
+        if($desc){ $query = "select * from WHOISACTIVE order by record_number desc,collection_time desc" }
 
         $result = Invoke-Sqlcmd2 @SqlCredHash -Query $query 
 
@@ -6327,4 +6329,95 @@ function Get-WhoIsActiveLog
     }
 
 }
+
+
+function Remove-AppFailureTable 
+{
+
+    [CmdletBinding()]
+    Param
+    (       
+        [Parameter(Mandatory=$true)]
+        [hashtable] 
+        $SqlCredHash
+  
+    )
+    process {
+   
+        $query = "DROP TABLE APP_FAILURE"
+        
+        Invoke-Sqlcmd2 @SqlCredHash -Query $query
+
+    }
+    
+} 
+
+
+function Remove-WhoisActiveTable 
+{
+
+    [CmdletBinding()]
+    Param
+    (       
+        [Parameter(Mandatory=$true)]
+        [hashtable] 
+        $SqlCredHash
+  
+    )
+    process {
+   
+        $query = "DROP TABLE WHOISACTIVE"
+        
+        Invoke-Sqlcmd2 @SqlCredHash -Query $query
+
+    }
+    
+} 
+
+
+function Remove-WhoisActiveAppLockTable 
+{
+
+    [CmdletBinding()]
+    Param
+    (       
+        [Parameter(Mandatory=$true)]
+        [hashtable] 
+        $SqlCredHash
+  
+    )
+    process {
+   
+        $query = "DROP TABLE WHOISACTIVE_AppLock"
+        
+        Invoke-Sqlcmd2 @SqlCredHash -Query $query
+
+    }
+    
+} 
+
+
+function Remove-AllWhoIsActiveTables
+ {
+
+    [CmdletBinding()]
+    Param
+    (       
+        [Parameter(Mandatory=$true)]
+        [hashtable] 
+        $SqlCredHash
+  
+    )
+    process {
+   
+        Remove-AppFailureTable -SqlCredHash $SqlCredHash
+
+        Remove-WhoisActiveTable -SqlCredHash $SqlCredHash
+
+        Remove-WhoisActiveAppLockTable -SqlCredHash $SqlCredHash
+
+    }
+    
+} 
+
 
