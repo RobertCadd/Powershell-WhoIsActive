@@ -17,6 +17,13 @@ Setup-WhoIsActive -SqlCredHash $SqlCredHash
 Run it:
 ```powershell 
 
-Run-WhoIsActive -SqlCredHash $SqlCredHash 
+Invoke-WhoIsActive -SqlCredHash $SqlCredHash 
+
+```
+
+You can specify the number of minutes to run :
+```powershell 
+
+Invoke-WhoIsActive -minutes 2 -SqlCredHash $SqlCredHash
 
 ```
