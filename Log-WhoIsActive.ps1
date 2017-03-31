@@ -6,12 +6,15 @@ Function Log-WhoIsActive {
         [Parameter(Mandatory=$true)]
         [hashtable] 
         $SqlCredHash,
+
         [Parameter(Mandatory=$true)]
         [PSCustomObject] 
         $dataObject,
+
         [Parameter(Mandatory=$true)]
         [Datetime] 
         $date,
+
         [Parameter(Mandatory=$true)]
         [int] 
         $recnum
@@ -32,7 +35,7 @@ Function Log-WhoIsActive {
 
         foreach($datarow in $dataObject){
 
-            if($datarow.sql_text.Contains("sp_server_diagnostics")) { continue }
+            if(($datarow.sql_text -eq $null) -or ($datarow.sql_text.Contains("sp_server_diagnostics"))) { continue }
                     
             $sql_textCleanup = $datarow.sql_text.Replace("'","''")
             			

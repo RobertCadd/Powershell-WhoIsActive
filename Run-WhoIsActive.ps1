@@ -34,7 +34,8 @@ Function Run-WhoIsActive {
 
                 $count++
 
-            } While ($Count -le 10)
+            } 
+            While ($Count -lt 12)
 
             $recordNumber = (get-AppFailure -SqlCredHash $SqlCredHash -date $date).RECORD_NUMBER
      
@@ -48,4 +49,5 @@ Function Run-WhoIsActive {
             
         }        
     }
+
 }

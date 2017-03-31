@@ -10,11 +10,7 @@ Function Setup-WhoisActive {
 
     process {
         
-        if(-Not(Test-WhoIsActivePresent -SqlCredHash $SqlCredHash)){
-
-           Install-WhoIsActive -SqlCredHash $SqlCredHash
-
-        }
+        if(-Not(Test-WhoIsActivePresent -SqlCredHash $SqlCredHash)) { Install-WhoIsActive -SqlCredHash $SqlCredHash }
 
         New-AppFailureTable -SqlCredHash $SqlCredHash
 

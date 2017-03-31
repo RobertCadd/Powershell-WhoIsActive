@@ -130,7 +130,7 @@ Function Invoke-Sqlcmd2 {
         Invoke-SQLBulkCopy
     .LINK
         Out-DataTable
-    .FUNCTIONALITY
+    .functionALITY
         SQL
     #>
 

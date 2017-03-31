@@ -2,10 +2,10 @@ Function Invoke-Parallel {
 
     <#
     .SYNOPSIS
-        Function to control parallel processing using runspaces
+        function to control parallel processing using runspaces
 
     .DESCRIPTION
-        Function to control parallel processing using runspaces
+        function to control parallel processing using runspaces
 
             Note that each runspace will not have access to variables and commands loaded in your session or in other runspaces by default.  
             This behaviour can be changed with parameters.
@@ -132,7 +132,7 @@ Function Invoke-Parallel {
 
         Reference a variable from the current session with the $Using:<Variable> syntax.  Requires PowerShell 3 or later. Note that -ImportVariables parameter is no longer necessary.
 
-    .FUNCTIONALITY
+    .functionALITY
         PowerShell Language
 
     .NOTES
@@ -222,7 +222,7 @@ Function Invoke-Parallel {
             
             if ($ImportVariables) {
                 #Exclude common parameters, bound parameters, and automatic variables
-                Function _temp {[cmdletbinding()] param() }
+                function _temp {[cmdletbinding()] param() }
                 $VariablesToExclude = @( (Get-Command _temp | Select -ExpandProperty parameters).Keys + $PSBoundParameters.Keys + $StandardUserEnv.Variables )
                 Write-Verbose "Excluding variables $( ($VariablesToExclude | sort ) -join ", ")"
 
@@ -244,7 +244,7 @@ Function Invoke-Parallel {
 
         #region functions
             
-            Function Get-RunspaceData {
+            function Get-RunspaceData {
                 [cmdletbinding()]
                 param( [switch]$Wait )
 

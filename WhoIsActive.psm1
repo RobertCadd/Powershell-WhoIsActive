@@ -3,10 +3,10 @@ function Invoke-Parallel
 {
     <#
     .SYNOPSIS
-        Function to control parallel processing using runspaces
+        function to control parallel processing using runspaces
 
     .DESCRIPTION
-        Function to control parallel processing using runspaces
+        function to control parallel processing using runspaces
 
             Note that each runspace will not have access to variables and commands loaded in your session or in other runspaces by default.  
             This behaviour can be changed with parameters.
@@ -133,7 +133,7 @@ function Invoke-Parallel
 
         Reference a variable from the current session with the $Using:<Variable> syntax.  Requires PowerShell 3 or later. Note that -ImportVariables parameter is no longer necessary.
 
-    .FUNCTIONALITY
+    .functionALITY
         PowerShell Language
 
     .NOTES
@@ -223,7 +223,7 @@ function Invoke-Parallel
             
             if ($ImportVariables) {
                 #Exclude common parameters, bound parameters, and automatic variables
-                Function _temp {[cmdletbinding()] param() }
+                function _temp {[cmdletbinding()] param() }
                 $VariablesToExclude = @( (Get-Command _temp | Select -ExpandProperty parameters).Keys + $PSBoundParameters.Keys + $StandardUserEnv.Variables )
                 Write-Verbose "Excluding variables $( ($VariablesToExclude | sort ) -join ", ")"
 
@@ -245,7 +245,7 @@ function Invoke-Parallel
 
         #region functions
             
-            Function Get-RunspaceData {
+            function Get-RunspaceData {
                 [cmdletbinding()]
                 param( [switch]$Wait )
 
@@ -744,7 +744,7 @@ function Invoke-Sqlcmd2
         Invoke-SQLBulkCopy
     .LINK
         Out-DataTable
-    .FUNCTIONALITY
+    .functionALITY
         SQL
     #>
 
@@ -1099,7 +1099,7 @@ function Invoke-Sqlcmd2
             }
 
 
-Function Get-SqlCredHash 
+function Get-SqlCredHash 
 {
     [cmdletbinding()]
     Param 
@@ -1190,7 +1190,7 @@ function Log-AppFailure
 }
 
 
-Function Get-AppFailure 
+function Get-AppFailure 
 {
     [CmdletBinding()]
     Param
@@ -1215,7 +1215,7 @@ Function Get-AppFailure
 }
 
 
-Function Get-WhoIsActiveLock 
+function Get-WhoIsActiveLock 
 {
     [CmdletBinding()]
     Param
@@ -1236,7 +1236,7 @@ Function Get-WhoIsActiveLock
 }
 
 
-Function Lock-WhoIsActiveLock 
+function Lock-WhoIsActiveLock 
 {
     [CmdletBinding()]
     Param
@@ -1257,7 +1257,7 @@ Function Lock-WhoIsActiveLock
 }
 
 
-Function Release-WhoIsActiveLock 
+function Release-WhoIsActiveLock 
 {
     [CmdletBinding()]
     Param
@@ -1276,7 +1276,7 @@ Function Release-WhoIsActiveLock
 }
 
 
-Function Get-WhoIsActive 
+function Get-WhoIsActive 
 {
     [CmdletBinding()]
     Param
@@ -1297,7 +1297,7 @@ Function Get-WhoIsActive
 }
 
 
-Function Log-WhoIsActive 
+function Log-WhoIsActive 
 {
     [CmdletBinding()]
     Param
@@ -1305,12 +1305,15 @@ Function Log-WhoIsActive
         [Parameter(Mandatory=$true)]
         [hashtable] 
         $SqlCredHash,
+
         [Parameter(Mandatory=$true)]
         [PSCustomObject] 
         $dataObject,
+
         [Parameter(Mandatory=$true)]
         [Datetime] 
         $date,
+
         [Parameter(Mandatory=$true)]
         [int] 
         $recnum
@@ -1331,7 +1334,7 @@ Function Log-WhoIsActive
 
         foreach($datarow in $dataObject){
 
-            if($datarow.sql_text.Contains("sp_server_diagnostics")) { continue }
+            if(($datarow.sql_text -eq $null) -or ($datarow.sql_text.Contains("sp_server_diagnostics"))) { continue }
                     
             $sql_textCleanup = $datarow.sql_text.Replace("'","''")
             			
@@ -1349,7 +1352,38 @@ Function Log-WhoIsActive
 }
 
 
-Function Run-WhoIsActive 
+function Invoke-WhoIsActive 
+{
+    [CmdletBinding()]
+    Param
+    (       
+        [Parameter(Mandatory=$true)]     
+        [hashtable] 
+        $SqlCredHash,
+        
+        [ValidateScript({ ($_ -gt 0) -or ($_ = $null) })]
+        [Parameter()]    
+        [int] 
+        $Minutes = 1
+
+    )
+
+    process {
+
+        $timeRange = 1..$Minutes
+        
+        foreach($minute in $timeRange){
+
+            Run-WhoIsActive -SqlCredHash $SqlCredHash
+
+        }
+
+    }
+
+}
+
+
+function Run-WhoIsActive 
 {
     [CmdletBinding()]
     Param
@@ -1385,7 +1419,8 @@ Function Run-WhoIsActive
 
                 $count++
 
-            } While ($Count -le 10)
+            } 
+            While ($Count -lt 12)
 
             $recordNumber = (get-AppFailure -SqlCredHash $SqlCredHash -date $date).RECORD_NUMBER
      
@@ -1402,7 +1437,7 @@ Function Run-WhoIsActive
 }
 
 
-Function New-AppFailureTable
+function New-AppFailureTable
 {
     [CmdletBinding()]
     Param
@@ -1435,7 +1470,7 @@ Function New-AppFailureTable
 }
 
 
-Function New-WhoIsActiveTable
+function New-WhoIsActiveTable
 {
     [CmdletBinding()]
     Param
@@ -1493,7 +1528,7 @@ Function New-WhoIsActiveTable
 }
 
 
-Function New-WhoIsActiveAppLockTable
+function New-WhoIsActiveAppLockTable
 {
     [CmdletBinding()]
     Param
@@ -1525,7 +1560,7 @@ Function New-WhoIsActiveAppLockTable
 }
 
 
-Function Setup-WhoisActive 
+function Setup-WhoisActive 
 {
     [CmdletBinding()]
     Param
@@ -1537,11 +1572,7 @@ Function Setup-WhoisActive
 
     process {
         
-        if(-Not(Test-WhoIsActivePresent -SqlCredHash $SqlCredHash)){
-
-           Install-WhoIsActive -SqlCredHash $SqlCredHash
-
-        }
+        if(-Not(Test-WhoIsActivePresent -SqlCredHash $SqlCredHash)) { Install-WhoIsActive -SqlCredHash $SqlCredHash }
 
         New-AppFailureTable -SqlCredHash $SqlCredHash
 
@@ -1553,7 +1584,7 @@ Function Setup-WhoisActive
 }
 
 
-Function Install-WhoIsActive
+function Install-WhoIsActive
 {
     [CmdletBinding()]
     Param
@@ -6245,7 +6276,7 @@ Function Install-WhoIsActive
 }
 
 
-Function Test-WhoIsActivePresent
+function Test-WhoIsActivePresent
 {
     [CmdletBinding()]
     Param
@@ -6255,15 +6286,10 @@ Function Test-WhoIsActivePresent
         $SqlCredHash
   
     )
-    begin
-    {
-        $Query = @"              
-        SELECT 1  FROM sys.procedures WHERE Name = 'sp_WhoIsActive' 
-"@
-
-    }
 
     process {
+
+        $Query = "SELECT 1  FROM sys.procedures WHERE Name = 'sp_WhoIsActive' "   
        
         $result = Invoke-Sqlcmd2 -ServerInstance $SqlCredHash.ServerInstance -Database Master -Credential $SqlCredHash.Credential  -Query $query
 
@@ -6274,6 +6300,31 @@ Function Test-WhoIsActivePresent
 }
 
 
+function Get-WhoIsActiveLog 
+{
 
+    [CmdletBinding()]
+    Param
+    (             
+        [Parameter(Mandatory=$true)]     
+        [hashtable] 
+        $SqlCredHash,
 
+        [Parameter()]     
+        [switch] 
+        $desc
+    )
+
+    process {
+                
+        $query = "select * from WHOISACTIVE order by record_number,collection_time"
+
+        if($desc){ $query = "select * from WHOISACTIVE order by record_number,collection_time desc" }
+
+        $result = Invoke-Sqlcmd2 @SqlCredHash -Query $query 
+
+        return $result                
+    }
+
+}
 
