@@ -21,9 +21,24 @@ Invoke-WhoIsActive -SqlCredHash $SqlCredHash
 
 ```
 
-You can specify the number of minutes to run :
+To specify the number of minutes to run :
 ```powershell 
 
 Invoke-WhoIsActive -Minutes 2 -SqlCredHash $SqlCredHash
+
+```
+
+To view the results :
+```powershell 
+
+Get-WhoIsActiveLog -SqlCredHash $SqlCredHash 
+
+#out-grid is more readable
+
+Get-WhoIsActiveLog -SqlCredHash $SqlCredHash | Out-GridView
+
+#use the -desc switch to sort results by most recent
+
+Get-WhoIsActiveLog -SqlCredHash $SqlCredHash -desc | Out-GridView
 
 ```
