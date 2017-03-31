@@ -1,5 +1,5 @@
-function Get-WhoIsActiveLog 
-{
+Function Get-WhoIsActiveLog {
+
 
     [CmdletBinding()]
     Param
@@ -23,4 +23,6 @@ function Get-WhoIsActiveLog
 
         return $result                
     }
+
+
 }

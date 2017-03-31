@@ -18,4 +18,5 @@ Function Log-AppFailure {
         
         Invoke-Sqlcmd2 @SqlCredHash -Query $query             
     }
+
 }

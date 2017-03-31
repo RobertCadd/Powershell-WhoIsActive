@@ -22,6 +22,11 @@ Function Invoke-WhoIsActive {
 
             Run-WhoIsActive -SqlCredHash $SqlCredHash
 
+            Write-Verbose "$minute complete" 
+
         }
+
     }
+
+
 }

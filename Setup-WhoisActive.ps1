@@ -19,4 +19,5 @@ Function Setup-WhoisActive {
         New-WhoIsActiveAppLockTable -SqlCredHash $SqlCredHash
               
     }
+
 }
