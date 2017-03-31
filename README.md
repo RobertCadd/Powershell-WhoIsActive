@@ -6,11 +6,11 @@ Create the tables and sp_whoisactive:
 
 Import-Module "C:\Temp\WhoIsActive.psm1"
 
-$secpasswd = ConvertTo-SecureString "Foo" -AsPlainText -Force                        
+$secpasswd = ConvertTo-SecureString "FooPw" -AsPlainText -Force                        
 
 $Credential = New-Object System.Management.Automation.PSCredential ("FooUser", $secpasswd)
 
-$SqlCredHash = @{"Credential" = $Credential;"ServerInstance" = "MsSql";"Database" = "Foo"}
+$SqlCredHash = @{"Credential" = $Credential;"ServerInstance" = "FooServer";"Database" = "FooDb"}
 
 Setup-WhoIsActive -SqlCredHash $SqlCredHash 
 ```
