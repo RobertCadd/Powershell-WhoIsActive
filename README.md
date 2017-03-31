@@ -9,7 +9,7 @@ Create the tables and sp_whoisactive:
     # Unblock the zip
     # Extract the  WhoIsActive folder to a module path (e.g. $env:USERPROFILE\Documents\WindowsPowerShell\Modules\)
 
-	import-module WhoIsActive
+import-module WhoIsActive
 
 $secpasswd = ConvertTo-SecureString "FooPw" -AsPlainText -Force                        
 
