@@ -1365,7 +1365,6 @@ function Invoke-WhoIsActive
         [Parameter()]    
         [int] 
         $Minutes = 1
-
     )
 
     process {
