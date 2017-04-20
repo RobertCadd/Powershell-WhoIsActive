@@ -17,7 +17,11 @@ $Credential = New-Object System.Management.Automation.PSCredential ("FooUser", $
 
 $SqlCredHash = @{"Credential" = $Credential;"ServerInstance" = "FooServer";"Database" = "FooDb"}
 
-Setup-WhoIsActive -SqlCredHash $SqlCredHash 
+Setup-WhoIsActive -SqlCredHash $SqlCredHash
+
+# This creates the following tables [APP_FAILURE] , [WHOISACTIVE] and [WHOISACTIVE_AppLock] in "FooDb"
+# This also ensures sp_whoisactive is installed
+
 ```
 Run it:
 ```powershell 
