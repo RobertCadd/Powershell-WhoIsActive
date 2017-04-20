@@ -14,8 +14,7 @@ function Invoke-WhoIsActive {
     )
 
     process {
-
-           
+          
         Try {
 
             $timeRange = 1..$Minutes

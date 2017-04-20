@@ -1369,25 +1369,24 @@ function Invoke-WhoIsActive
     )
 
     process {
+         
+		Try {
 
-           
-        Try {
+			$timeRange = 1..$Minutes
 
-            $timeRange = 1..$Minutes
-        
-            foreach($minute in $timeRange){
+			foreach($minute in $timeRange){
 
-                Run-WhoIsActive -SqlCredHash $SqlCredHash
+				Run-WhoIsActive -SqlCredHash $SqlCredHash
 
-                Write-Verbose "$minute complete" 
+				Write-Verbose "$minute complete" 
 
-            }
-        }
-        Finally {
+			}
+		}
+		Finally {
 
-            Release-WhoIsActiveLock -SqlCredHash $SqlCredHash
+			Release-WhoIsActiveLock -SqlCredHash $SqlCredHash
 
-        }
+		}
     }
 }
 
