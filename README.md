@@ -38,12 +38,16 @@ To view the results :
 
 Get-WhoIsActiveLog -SqlCredHash $SqlCredHash 
 
-#out-grid is more readable
+#out-grid allows for column filtering and reads better
 
 Get-WhoIsActiveLog -SqlCredHash $SqlCredHash | Out-GridView
 
 #use the -desc switch to sort results by most recent
 
 Get-WhoIsActiveLog -SqlCredHash $SqlCredHash -desc | Out-GridView
+
+#use the -WaitDuration switch to sort results by the [dd hh:mm:ss.mss] column
+
+Get-WhoIsActiveLog -SqlCredHash $SqlCredHash -WaitDuration | Out-GridView
 
 ```
