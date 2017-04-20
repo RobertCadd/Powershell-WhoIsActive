@@ -6320,7 +6320,11 @@ function Get-WhoIsActiveLog
 
         [Parameter()]     
         [switch] 
-        $desc
+        $desc,
+
+        [Parameter()]     
+        [switch] 
+        $WaitDuration
     )
 
     process {
@@ -6328,6 +6332,8 @@ function Get-WhoIsActiveLog
         $query = "select * from WHOISACTIVE order by record_number,collection_time"
 
         if($desc){ $query = "select * from WHOISACTIVE order by record_number desc,collection_time desc" }
+
+        if($WaitDuration) { $query =  "select * from WHOISACTIVE order by [dd hh:mm:ss.mss] desc" }
 
         $result = Invoke-Sqlcmd2 @SqlCredHash -Query $query 
 
