@@ -43,7 +43,7 @@ Function Export-GalleryImageToVhd {
         $ApplicationId,
 
         [Parameter()]
-        [SecureString]
+        [string]
         $ClientSecret,
 
         [Parameter()]
@@ -67,7 +67,7 @@ Function Export-GalleryImageToVhd {
 
         if ($TenantId -and $ApplicationId -and $ClientSecret) {
             Write-Verbose "Connecting to Azure as service principal $ApplicationId"
-            $spnCredential = New-Object PSCredential($ApplicationId, $ClientSecret)
+            $spnCredential = New-Object PSCredential($ApplicationId, (ConvertTo-SecureString $ClientSecret -AsPlainText -Force))
             Connect-AzAccount -ServicePrincipal -Credential $spnCredential -TenantId $TenantId | Out-Null
         }
 
