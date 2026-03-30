@@ -28,11 +28,11 @@ Function Export-GalleryImageToVhd {
 
         [Parameter(Mandatory=$true)]
         [string]
-        $ContainerName,
-
-        [Parameter(Mandatory=$true)]
-        [string]
         $VhdBlobName,
+
+        [Parameter()]
+        [string]
+        $ContainerName = "system",
 
         [Parameter()]
         [string]
@@ -111,7 +111,9 @@ Function Export-GalleryImageToVhd {
                 -Access            Read `
                 -DurationInSecond  $SasExpiryDurationSeconds
 
-            Write-Verbose "Building destination SAS URL for $StorageAccountName/$ContainerName/$VhdBlobName"
+            $blobPath = "Microsoft.Compute/Images/images/$VhdBlobName"
+
+            Write-Verbose "Building destination SAS URL for $StorageAccountName/$ContainerName/$blobPath"
             $storageAccount = Get-AzStorageAccount `
                 -ResourceGroupName $StorageAccountResourceGroup `
                 -Name              $StorageAccountName
@@ -120,7 +122,7 @@ Function Export-GalleryImageToVhd {
 
             $destSasToken = New-AzStorageBlobSASToken `
                 -Container  $ContainerName `
-                -Blob       $VhdBlobName `
+                -Blob       $blobPath `
                 -Permission rw `
                 -ExpiryTime (Get-Date).AddSeconds($SasExpiryDurationSeconds) `
                 -Context    $storageCtx `
@@ -135,13 +137,13 @@ Function Export-GalleryImageToVhd {
 
             Write-Verbose "azcopy completed successfully"
 
-            $blobUri = "$($storageAccount.PrimaryEndpoints.Blob)$ContainerName/$VhdBlobName"
+            $blobUri = "$($storageAccount.PrimaryEndpoints.Blob)$ContainerName/$blobPath"
 
             return [PSCustomObject]@{
                 BlobUri        = $blobUri
                 StorageAccount = $StorageAccountName
                 Container      = $ContainerName
-                BlobName       = $VhdBlobName
+                BlobName       = $blobPath
                 ImageVersion   = $ImageVersion
             }
         }
