@@ -36,6 +36,10 @@ Function Export-GalleryImageToVhd {
 
         [Parameter()]
         [string]
+        $TenantId,
+
+        [Parameter()]
+        [string]
         $SubscriptionId,
 
         [Parameter()]
@@ -51,6 +55,11 @@ Function Export-GalleryImageToVhd {
 
         if (-not (Get-Command azcopy -ErrorAction SilentlyContinue)) {
             throw "azcopy was not found in PATH. Install azcopy and ensure it is accessible before running this function."
+        }
+
+        if ($TenantId) {
+            Write-Verbose "Connecting to Azure with TenantId $TenantId"
+            Connect-AzAccount -TenantId $TenantId | Out-Null
         }
 
         if ($SubscriptionId) {
