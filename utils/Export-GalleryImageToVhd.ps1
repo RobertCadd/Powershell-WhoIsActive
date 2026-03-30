@@ -129,7 +129,8 @@ Function Export-GalleryImageToVhd {
                 -FullUri
 
             Write-Verbose "Starting azcopy from disk SAS to blob destination"
-            azcopy copy $sas.AccessSAS $destSasToken --blob-type PageBlob
+            $azcopyOutput = azcopy copy $sas.AccessSAS $destSasToken --blob-type PageBlob 2>&1
+            $azcopyOutput | Out-Host
 
             if ($LASTEXITCODE -ne 0) {
                 throw "azcopy exited with code $LASTEXITCODE. See azcopy output above for details."
@@ -145,6 +146,7 @@ Function Export-GalleryImageToVhd {
                 Container      = $ContainerName
                 BlobName       = $blobPath
                 ImageVersion   = $ImageVersion
+                AzcopyOutput   = $azcopyOutput -join "`n"
             }
         }
         catch {
@@ -157,14 +159,14 @@ Function Export-GalleryImageToVhd {
                 Revoke-AzDiskAccess `
                     -ResourceGroupName $TempDiskResourceGroup `
                     -DiskName          $tempDiskName `
-                    -ErrorAction SilentlyContinue
+                    -ErrorAction SilentlyContinue | Out-Null
 
                 Write-Verbose "Removing temporary managed disk $tempDiskName"
                 Remove-AzDisk `
                     -ResourceGroupName $TempDiskResourceGroup `
                     -DiskName          $tempDiskName `
                     -Force `
-                    -ErrorAction SilentlyContinue
+                    -ErrorAction SilentlyContinue | Out-Null
             }
         }
     }
