@@ -40,6 +40,14 @@ Function Export-GalleryImageToVhd {
 
         [Parameter()]
         [string]
+        $ApplicationId,
+
+        [Parameter()]
+        [SecureString]
+        $ClientSecret,
+
+        [Parameter()]
+        [string]
         $SubscriptionId,
 
         [Parameter()]
@@ -57,9 +65,10 @@ Function Export-GalleryImageToVhd {
             throw "azcopy was not found in PATH. Install azcopy and ensure it is accessible before running this function."
         }
 
-        if ($TenantId) {
-            Write-Verbose "Connecting to Azure with TenantId $TenantId"
-            Connect-AzAccount -TenantId $TenantId | Out-Null
+        if ($TenantId -and $ApplicationId -and $ClientSecret) {
+            Write-Verbose "Connecting to Azure as service principal $ApplicationId"
+            $spnCredential = New-Object PSCredential($ApplicationId, $ClientSecret)
+            Connect-AzAccount -ServicePrincipal -Credential $spnCredential -TenantId $TenantId | Out-Null
         }
 
         if ($SubscriptionId) {
